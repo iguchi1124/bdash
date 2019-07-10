@@ -23,6 +23,15 @@ create table if not exists queries (
   updatedAt datetime not null
 );
 
+create table if not exists query_parameters (
+  id integer primary key autoincrement,
+  queryId integer not null references queries(id),
+  key text not null,
+  value text not null,
+  createdAt datetime not null,
+  updatedAt datetime not null
+);
+
 create table if not exists charts (
   id integer primary key autoincrement,
   queryId integer not null references queries(id) on delete cascade,

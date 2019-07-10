@@ -1,4 +1,5 @@
 import { connection } from "./Connection";
+import QueryParameter from "./QueryParameter";
 
 export default class Query {
   static getAll() {
@@ -7,6 +8,8 @@ export default class Query {
 
   static async find(id) {
     const query = await connection.get("select * from queries where id = ?", id);
+
+    query.parameters = await QueryParameter.getAll(id);
 
     if (query.fields) {
       query.fields = JSON.parse(query.fields);
