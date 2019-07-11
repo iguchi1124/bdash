@@ -60,7 +60,12 @@ const QueryAction = {
     const start = Date.now();
     let result;
     try {
-      result = await executor.execute(queryBody, { startLine });
+      let context = {};
+      query.parameters.forEach(({ key, value }) => context[key] = value);
+
+      const sql = Util.compileTemplate(queryBody, context);
+
+      result = await executor.execute(sql, { startLine });
     } catch (err) {
       const params = {
         status: "failure",
