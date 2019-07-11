@@ -2,7 +2,7 @@ import { connection } from "./Connection";
 
 export default class QueryParameter {
   static getAll(queryId) {
-    return connection.all("select id, queryId, key, value from query_parameters where queryId = ? order by createdAt desc", queryId);
+    return connection.all("select id, queryId, key, value from query_parameters where queryId = ? order by createdAt asc", queryId);
   }
 
   static async create({ key, value, queryId }) {

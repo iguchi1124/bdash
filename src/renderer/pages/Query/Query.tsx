@@ -72,6 +72,10 @@ class Query extends React.Component<any, QueryState> {
           onChangeEditorHeight={height => Action.updateEditor({ height })}
           onExecute={() => this.handleExecute(query)}
           onCancel={() => this.handleCancel(query)}
+          onAddQueryParameter={(key, value) => Action.addNewQueryParameter(query.id, key, value)}
+          onUpdateQueryParameter={(id, params) => Action.updateQueryParameter(query.id, id, params)}
+          onDeleteQueryParameter={id => Action.deleteQueryParameter(query.id, id)}
+          onToggleParameterList={() => Action.toggleParameterList()}
         />
         <QueryResult
           query={query}

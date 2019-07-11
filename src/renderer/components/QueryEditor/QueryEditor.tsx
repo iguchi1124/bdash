@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../Button";
 import Editor from "../Editor";
+import ParameterList from "../ParameterList";
 
 export default class QueryEditor extends React.Component<any, any> {
   editorElement: HTMLDivElement;
@@ -103,6 +104,34 @@ export default class QueryEditor extends React.Component<any, any> {
     );
   }
 
+  renderToggleParameterListButton() {
+    const showParameterList = this.props.editor.showParameterList;
+
+    return (
+      <Button className="QueryEditor-parameterToggleBtn" onClick={() => this.props.onToggleParameterList()}>
+        {showParameterList ? <i className="fa fa-caret-down" /> : <i className="fa fa-caret-right" />} Parameters
+      </Button>
+    );
+  }
+
+  renderParameterList() {
+    const query = this.props.query;
+    const showParameterList = this.props.editor.showParameterList;
+
+    if (showParameterList) {
+      return (
+        <ParameterList
+          parameters={query.parameters}
+          onAddParameter={this.props.onAddQueryParameter}
+          onUpdateParameter={this.props.onUpdateQueryParameter}
+          onDeleteParameter={this.props.onDeleteQueryParameter}
+        />
+      );
+    }
+
+    return;
+  }
+
   render() {
     const query = this.props.query;
 
@@ -119,11 +148,15 @@ export default class QueryEditor extends React.Component<any, any> {
         />
         <div className="QueryEditor-navbar">
           {this.renderButton()}
+          {this.renderToggleParameterListButton()}
           {this.renderStatus()}
+
           <span onMouseDown={this.handleResizeStart.bind(this)} className="QueryEditor-resize">
             <i className="fa fa-arrows-v" />
           </span>
         </div>
+
+        {this.renderParameterList()}
       </div>
     );
   }

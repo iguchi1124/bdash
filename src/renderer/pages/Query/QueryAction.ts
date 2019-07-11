@@ -105,6 +105,21 @@ const QueryAction = {
     query.executor.cancel();
   },
 
+  async addNewQueryParameter(queryId, key, value) {
+    const parameter = await Database.QueryParameter.create({ queryId, key, value });
+    dispatch("addNewQueryParameter", { queryId, parameter });
+  },
+
+  updateQueryParameter(queryId, id, params) {
+    Database.QueryParameter.update(id, params);
+    dispatch("updateQueryParameter", { queryId, id, params });
+  },
+
+  async deleteQueryParameter(queryId, id) {
+    await Database.QueryParameter.del(id);
+    dispatch("deleteQueryParameter", { queryId, id });
+  },
+
   updateEditor(params) {
     dispatch("updateEditor", params);
   },
@@ -123,6 +138,10 @@ const QueryAction = {
   async updateChart(id, params) {
     const chart = await Database.Chart.update(id, params);
     dispatch("updateChart", { id, params: chart });
+  },
+
+  toggleParameterList() {
+    dispatch("toggleParameterList", {});
   }
 };
 

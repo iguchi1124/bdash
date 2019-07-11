@@ -10,6 +10,7 @@ export interface QueryState {
   editor: {
     height: number | null;
     line: number | null;
+    showParameterList: boolean;
   };
 }
 
@@ -24,7 +25,8 @@ export default class QueryStore extends Store<QueryState> {
       selectedQueryId: null,
       editor: {
         height: null,
-        line: null
+        line: null,
+        showParameterList: false
       }
     };
   }
@@ -58,6 +60,20 @@ export default class QueryStore extends Store<QueryState> {
           .set("editor.line", null)
           .del(`queries.${idx}`, payload.id);
       }
+      case "addNewQueryParameter": {
+        const idx = this.findQueryIndex(payload.queryId);
+        return this.append(`queries.${idx}.parameters`, payload.parameter);
+      }
+      case "updateQueryParameter": {
+        const queryIdx = this.findQueryIndex(payload.queryId);
+        const idx = this.findQueryParameterIndex(payload.queryId, payload.id);
+        return this.merge(`queries.${queryIdx}.parameters.${idx}`, payload.params);
+      }
+      case "deleteQueryParameter": {
+        const queryIdx = this.findQueryIndex(payload.queryId);
+        const idx = this.findQueryParameterIndex(payload.queryId, payload.id);
+        return this.del(`queries.${queryIdx}.parameters.${idx}`, payload.id);
+      }
       case "updateEditor": {
         return this.merge("editor", payload);
       }
@@ -72,6 +88,9 @@ export default class QueryStore extends Store<QueryState> {
         const idx = this.findChartIndex(payload.id);
         return this.merge(`charts.${idx}`, payload.params);
       }
+      case "toggleParameterList": {
+        return this.set("editor.showParameterList", !this.state.editor.showParameterList);
+      }
     }
   }
 
@@ -80,6 +99,17 @@ export default class QueryStore extends Store<QueryState> {
 
     if (idx === -1) {
       throw new Error(`query id:${id} not found`);
+    }
+
+    return idx;
+  }
+
+  findQueryParameterIndex(queryId, id) {
+    const queryIdx = this.findQueryIndex(queryId);
+    const idx = this.state.queries[queryIdx].parameters.findIndex(p => p.id == id);
+
+    if (idx === -1) {
+      throw new Error(`query parameter id:${id} not found`);
     }
 
     return idx;

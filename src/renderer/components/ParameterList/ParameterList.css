@@ -1,0 +1,31 @@
+.ParameterList-list {
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+  position: relative;
+  border-top: 1px solid #ccc;
+}
+
+.ParameterList-input {
+  border-radius: 3px;
+  margin-right: 5px;
+  box-shadow: inset 0 1px 2px #cfd7e6;
+  padding: 5px;
+  border: 1px solid #ccc;
+  height: 100%;
+}
+
+.ParameterList-item {
+  box-sizing: border-box;
+  border-bottom: 1px solid #ccc;
+  padding: 5px 10px;
+}
+
+.ParameterList-item > span {
+  font-size: 14px;
+  color: #999;
+  cursor: pointer;
+}
+
+.ParameterList-new {
+  padding: 5px 10px;
+}

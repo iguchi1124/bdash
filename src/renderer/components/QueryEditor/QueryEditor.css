@@ -17,6 +17,10 @@
   height: var(--QueryEditor-navbarHeight);
 }
 
+.QueryEditor-parameterToggleBtn {
+  margin-left: 5px !important;
+}
+
 .QueryEditor-status {
   display: inline-block;
   margin-left: 5px;
