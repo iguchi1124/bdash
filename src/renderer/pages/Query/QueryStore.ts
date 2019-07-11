@@ -72,7 +72,7 @@ export default class QueryStore extends Store<QueryState> {
       case "deleteQueryParameter": {
         const queryIdx = this.findQueryIndex(payload.queryId);
         const idx = this.findQueryParameterIndex(payload.queryId, payload.id);
-        return this.del(`queries.${queryIdx}.parameters.${idx}`, payload.id);
+        return this.del(`queries.${queryIdx}.parameters.${idx}`);
       }
       case "updateEditor": {
         return this.merge("editor", payload);
@@ -106,7 +106,7 @@ export default class QueryStore extends Store<QueryState> {
 
   findQueryParameterIndex(queryId, id) {
     const queryIdx = this.findQueryIndex(queryId);
-    const idx = this.state.queries[queryIdx].parameters.findIndex(p => p.id == id);
+    const idx = this.state.queries[queryIdx].parameters.findIndex(p => p.id === id);
 
     if (idx === -1) {
       throw new Error(`query parameter id:${id} not found`);

@@ -60,8 +60,8 @@ const QueryAction = {
     const start = Date.now();
     let result;
     try {
-      let context = {};
-      query.parameters.forEach(({ key, value }) => context[key] = value);
+      const context = {};
+      query.parameters.forEach(({ key, value }) => (context[key] = value));
 
       const sql = Util.compileTemplate(queryBody, context);
 

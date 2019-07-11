@@ -27,8 +27,18 @@ export default class ParameterList extends React.Component<any, any> {
           {parameters.map(parameter => {
             return (
               <div className="ParameterList-item" key={parameter.id}>
-                <input className="ParameterList-input" name="key" value={parameter.key} onChange={e => this.handleChange(e, parameter)}/>
-                <input className="ParameterList-input" name="value" value={parameter.value} onChange={e => this.handleChange(e, parameter)} />
+                <input
+                  className="ParameterList-input"
+                  name="key"
+                  value={parameter.key}
+                  onChange={e => this.handleChange(e, parameter)}
+                />
+                <input
+                  className="ParameterList-input"
+                  name="value"
+                  value={parameter.value}
+                  onChange={e => this.handleChange(e, parameter)}
+                />
                 <span onClick={() => this.props.onDeleteParameter(parameter.id)}>
                   <i className="fa fa-remove" />
                 </span>
@@ -38,10 +48,18 @@ export default class ParameterList extends React.Component<any, any> {
         </div>
 
         <div className="ParameterList-new">
-          <input className="ParameterList-input" ref={node => (this.newParameterKeyInputElement = node)} placeholder="KEY" />
-          <input className="ParameterList-input" ref={node => (this.newParameterValueInputElement = node)} placeholder="VALUE" />
+          <input
+            className="ParameterList-input"
+            ref={node => (this.newParameterKeyInputElement = node)}
+            placeholder="KEY"
+          />
+          <input
+            className="ParameterList-input"
+            ref={node => (this.newParameterValueInputElement = node)}
+            placeholder="VALUE"
+          />
           <Button className="ParameterList-addBtn" onClick={() => this.handleAddParameter()}>
-              Add
+            Add
           </Button>
         </div>
       </div>
