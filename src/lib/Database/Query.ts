@@ -38,7 +38,7 @@ export default class Query {
     `;
     const id = await connection.insert(sql, dataSourceId, title);
 
-    return { id, dataSourceId, title };
+    return { id, dataSourceId, title, parameters: [] };
   }
 
   static update(id, params) {
@@ -61,6 +61,6 @@ export default class Query {
   }
 
   static del(id) {
-    return connection.run("delete from queries where id = ?", id);
+    return QueryParameter.delAll(id) && connection.run("delete from queries where id = ?", id);
   }
 }

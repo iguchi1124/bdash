@@ -38,4 +38,8 @@ export default class QueryParameter {
   static del(id) {
     return connection.run("delete from query_parameters where id = ?", id);
   }
+
+  static delAll(queryId) {
+    return connection.run("delete from query_parameters where queryId = ?", queryId);
+  }
 }
