@@ -1,6 +1,6 @@
 import { template, templateSettings } from "lodash";
 
-templateSettings.interpolate = /{{([\s\S]+?)}}/g;
+templateSettings.interpolate = /\$(\w+)/g;
 
 export default function compileTemplate(text: string, context: object): string {
   const compiled = template(text);
