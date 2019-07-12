@@ -24,23 +24,6 @@ export default class QueryEditor extends React.Component<any, any> {
     }
   }
 
-  handleResizeStart(e) {
-    e.preventDefault();
-    const height = this.editorElement.clientHeight;
-    const y = e.pageY;
-    const handleResize = e => {
-      let newHeight = height + (e.pageY - y);
-      if (newHeight < 0) newHeight = 0;
-      this.props.onChangeEditorHeight(newHeight);
-    };
-    const handleResizeStop = () => {
-      document.removeEventListener("mouseup", handleResizeStop);
-      document.removeEventListener("mousemove", handleResize);
-    };
-    document.addEventListener("mousemove", handleResize);
-    document.addEventListener("mouseup", handleResizeStop);
-  }
-
   renderButton() {
     if (this.props.query.status === "working") {
       return (
@@ -120,9 +103,6 @@ export default class QueryEditor extends React.Component<any, any> {
         <div className="QueryEditor-navbar">
           {this.renderButton()}
           {this.renderStatus()}
-          <span onMouseDown={this.handleResizeStart.bind(this)} className="QueryEditor-resize">
-            <i className="fa fa-arrows-v" />
-          </span>
         </div>
       </div>
     );

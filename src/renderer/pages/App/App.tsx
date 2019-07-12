@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "../../flux/Container";
 import GlobalMenu from "../../components/GlobalMenu";
+import { FrameSet, Frame } from "../../components/FlexibleFrame";
 import { store, AppState } from "./AppStore";
 import Action from "./AppAction";
 import Query from "../Query";
@@ -29,14 +30,12 @@ class App extends React.Component<any, AppState> {
     const Page = this.getSelectedPage();
 
     return (
-      <div className="page-app">
-        <div className="page-app-menu">
+      <FrameSet direction="row" className="page-app">
+        <Frame width="48" className="page-app-menu">
           <GlobalMenu selectedPage={this.state.selectedPage} onSelect={Action.selectPage} />
-        </div>
-        <div className="page-app-main">
-          <Page />
-        </div>
-      </div>
+        </Frame>
+        <Page />
+      </FrameSet>
     );
   }
 }

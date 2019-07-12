@@ -1,11 +1,16 @@
 .QueryEditor {
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
-  --QueryEditor-navbarHeight: 45px;
+  height: 100%;
+  overflow: hidden;
 }
 
 .QueryEditor .Editor .CodeMirror {
   height: 100%;
+}
+
+.QueryEditor .Editor {
+  height: calc(100% - 45px);
 }
 
 .QueryEditor-navbar {
@@ -14,7 +19,7 @@
   background-color: #f7f7f7;
   position: relative;
   border-top: 1px solid #ccc;
-  height: var(--QueryEditor-navbarHeight);
+  height: 45px;
 }
 
 .QueryEditor-status {
@@ -46,14 +51,4 @@
 
 .QueryEditor-status.is-error span {
   color: #bb0c0c;
-}
-
-.QueryEditor-resize {
-  position: absolute;
-  right: 8px;
-  top: 5px;
-  display: inline-block;
-  color: #999;
-  cursor: row-resize;
-  padding: 10px 20px;
 }
