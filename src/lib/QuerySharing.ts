@@ -18,6 +18,13 @@ export default {
       |type|${dataSource.type}
       ${DataSource.create(dataSource).descriptionTable()}
 
+      ## Parameters
+      |key|value|
+      |---|---|
+      ${query.parameters.map(parameter => {
+        return `|${parameter.key}|${parameter.value}|`
+      }).join("\n")}
+
       ## Created by
       [Bdash](https://github.com/bdash-app/bdash)
     `);
